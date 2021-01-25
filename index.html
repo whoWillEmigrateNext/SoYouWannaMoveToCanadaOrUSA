@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+ <meta charset="UTF-8">
+ <title>Виталик едет в Америку или Канаду!</title>
+ <style>
+  .body {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .img {
+    width: 800px;
+    border-radius: 15px;
+    margin: 1rem 0;
+  }
+
+  .timer {
+    font-size: 30px;
+    margin: .5rem 0;
+  }
+
+ </style>
+</head>
+
+<body class="body">
+<h1>Виталик имигрирует в Америку или Канаду!</h1>
+<img src="./img.jpg" class="img" />
+<div class="timer" id="greenCard">Loading...</div>
+ <div class="timer" id="usa">Loading....</div>
+
+<div id="canada">Loading...</div>
+</body>
+
+<script>
+ const tik = (date, el, text) => {
+   const deadline = date - Date.now();
+   setTimeout(()=>{
+     if (deadline < 0) {
+       el.innerHTML = 'Получилось?';
+     }
+     else {
+       const left = new Date(deadline);
+       el.innerHTML = `${text} через: ${left.getUTCFullYear() - 1970}г ${left.getUTCMonth()}м ${left.getUTCDate() - 1}д
+                          ${left.getUTCHours()}:${left.getUTCMinutes()}:${left.getUTCSeconds()}`;
+       tik(date, el, text);
+     }
+   }, 1000);
+ }
+ tik(new Date(2021, 4, 8, 23, 59, 59), greenCard, 'Выиграет Гринкарту');
+ tik(new Date(2022, 0, 31, 23, 59, 59), usa, 'И уедет в США');
+ tik(new Date(2023, 0, 31, 23, 59, 59), canada, 'А потом уже и в Канаду');
+
+</script>
+</html>
